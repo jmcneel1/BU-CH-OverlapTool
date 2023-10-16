@@ -13,6 +13,9 @@
 namespace BUEHT
 {
 
+/*
+*/
+
 class Atom
 {
   public:
