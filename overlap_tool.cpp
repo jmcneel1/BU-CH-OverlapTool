@@ -27,9 +27,15 @@ int main ()
   // n1 is the n quantum number for atom 1
   // n2 is the n quantum number for atom 2
   // (1 for first row, 2 for second row, 3 for third row)
+
   int atomicnum1, atomicnum2, l1, l2, n1, n2;
+ 
   // The coordinates (angstrom)
+
   double x1, x2, y1, y2, z1, z2;
+  
+  // Now we start interacting with the user
+
   std::cout << "Welcome!\nThis is a simple utility to calculate the overlap\n";
   std::cout << "integral between shells.\n";
   std::cout << "Please enter the atomic number of center 1: ";
@@ -43,8 +49,10 @@ int main ()
   int count = 0;
   std::cout << "Please enter the angular moments (L=0,1,2) for atom 1: ";
   std::cin >> l1;
+
   // Check to make sure that this BF exists.
   // If not, prompt the user again...
+  
   while ( true )
   {
     if ( (*(BUEHT::bueht_param_ptr[atomicnum1-1]+count)).an == atomicnum1 )
@@ -102,7 +110,7 @@ int main ()
 
   // Note basis function parameters (zeta) were taken from Greg Landrum's 
   // YAeHMOP (https://github.com/greglandrum/yaehmop.git)
-  
+
   BUEHT::BasisFunction bf1 (n1,l1,atomicnum1);
   BUEHT::BasisFunction bf2 (n2,l2,atomicnum2);
   if ( l1 == 0 && l2 == 0 ) // Two s-shells
