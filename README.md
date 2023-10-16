@@ -10,6 +10,7 @@ All modern C++ compilers should successfully compile the program. Because the pr
 Simply run (in the case of GNU g++)
 
 g++ -c -Iinclude/ overlap_tool.cpp
+
 g++ -o overlap_tool overlap_tool.o
 
 --------------------------------------

@@ -5,6 +5,8 @@
 
 /*
 
+  James McNeely
+
   This is a simple tool that will calculate the overlap 
   integral between shells on different atoms
 
@@ -97,8 +99,10 @@ int main ()
   std::vector<double> coord2 {x2,y2,z2};
   BUEHT::Atom atom1(atomicnum1,coord1);
   BUEHT::Atom atom2(atomicnum2,coord2);
+
   // Note basis function parameters (zeta) were taken from Greg Landrum's 
   // YAeHMOP (https://github.com/greglandrum/yaehmop.git)
+  
   BUEHT::BasisFunction bf1 (n1,l1,atomicnum1);
   BUEHT::BasisFunction bf2 (n2,l2,atomicnum2);
   if ( l1 == 0 && l2 == 0 ) // Two s-shells
