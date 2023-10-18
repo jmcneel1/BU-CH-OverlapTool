@@ -14,16 +14,39 @@ namespace BUEHT
 {
 
 /*
+
+  James McNeely
+
+  This contains the Atom class
+
+  The main private variables of an atom object are as follows:
+
+  1: The atomic number.
+  2: The atomic mass.
+  3: The number of valence shells for the atom.
+  4. The coordinates for the atom
+
+  This class also contains features that are irrelevent for this simple tool, but
+  were left in the class for transferrability sake.
+
+  The constructors are listed below in the code, and are the easiest way to 
+  construct an Atom object.
+
 */
 
 class Atom
 {
   public:
 
-    Atom() = default;
+    Atom() = default; 
 
     Atom( const Atom & old_atom ) = default;
 
+    /*
+      There are no coordinates in the following constructor. Useful as a 
+      placeholder.
+    */
+    
     Atom( int anum )                     
     {
       if ( anum >= 0 && anum < (NUM_ELEMENTS+1) )
@@ -38,6 +61,11 @@ class Atom
         exit(1);
       }
     }
+
+    /*
+      This constructor provides an object fully capable of being used
+      to calculate the overlap integral
+    */
   
     Atom( int anum, const std::vector<double> & coords ) : myX{coords[0]},
                                                            myY{coords[1]},
@@ -49,6 +77,11 @@ class Atom
       this->myNumShells = tmp.myNumShells;
     }
   
+    /*
+      This constructor provides an object fully capable of being used
+      to calculate the overlap integral
+    */
+
     Atom( int anum, double x, double y, double z) : myX{x},
                                                     myY{y},
                                                     myZ{z}
@@ -59,10 +92,20 @@ class Atom
       this->myNumShells = tmp.myNumShells;
     }
 
+    /*
+      The following is useful for printing
+    */
+
     std::string GetSymbol() const
     {
       return bueht_atomic_symbols[myAtomicNumber-1];
     }
+
+    /*
+      The following is useful for printing, although
+      it doesn't really belong to the object. This might be 
+      moved to a utility header in the future.
+    */
 
     std::string GetSymbol( int anum )
     {
@@ -93,6 +136,10 @@ class Atom
     {
       return myAtomicMass;
     }
+
+    /*
+      This is not functional in the current tool.
+    */
 
     double GetMulliken () const
     {

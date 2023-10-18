@@ -11,12 +11,29 @@
 namespace BUEHT
 {
     /*
+
+      James McNeely
+
       Here we use basis functions specific for EHT.
       Namely each BF is a contraction of MAX two STO primitives.
       Thus, there are 4 pairs to evaluate, but in many cases this 
       is drastically reduced due to there being a single STO primitive
 
       We also have the norms for each of the primitives stored already
+
+      This is the kernel of the program.
+
+      Here we define SS, SP, SD, PP, PD, and DD overlaps.
+
+      Each "type" starts with prolate spheroidal coordinates
+      to calculate the overlap (for each pair of primitives), 
+      and proceeds to rotate the overlaps accordingly to
+      get back to the input orientation.
+
+    */
+
+    /*
+      This defines the 
     */
 
     inline double Overlap_C_lmj ( const int & l, const int & m,

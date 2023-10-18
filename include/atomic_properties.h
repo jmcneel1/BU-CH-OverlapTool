@@ -2,6 +2,9 @@
 #define _bueht_atomic_properties
 
 /*
+
+  James McNeely
+
   This file contains some useful arrays that
   store information about the atoms modeled 
   with BUEHT

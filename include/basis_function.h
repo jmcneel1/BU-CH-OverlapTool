@@ -9,7 +9,31 @@
 #include <vector>
 
 /*
+  James McNeely
+
   This BasisFunction class stores relevant information for a shell.
+
+  Defaults are from Greg Landrum's YAeHMOP 
+   (https://github.com/greglandrum/yaehmop.git)
+
+  Private Variables include:
+
+  1. The principle quantum number (myN)
+  2. The angular momentum qN (myL)
+  3. The contraction coefficients. These are for a normalized BF. 
+     (c1^2<P1|P1>+c2^2<P2|P2>+2c1c2<P1P2> = 1)
+     For example, for Cr(III) 3D shell
+     <X|X> = c1^2<P1|P1> + c2^2<P2|P2> + 2c1c2<P1|P2>
+           = 0.5060^2 * 1 + 0.675^2 * 1 + 2 * 0.5060 * 0.675 * 
+             (2*z1)^(3.5)*(2*z2)^(3.5)/(2*n)! * 
+             Int(r2*r^(n-1)*r^(n-1)*exp(-(z1+z2)*r),dr) 
+           = 0.5060^2 * 1 + 0.675^2 * 1 + 2 * 0.5060 * 0.675 * 
+             (2*z1)^(3.5)*(2*z2)^(3.5)/(2*n)! * 
+             (2*n)!/(z1+z2)^(2n+1) = 1
+  4. The Zetas for each primitive
+
+  These basis function store two primitives for EACH, with the 
+  single-zeta BFs found by the second coefficient being 0.0.
 */
 
 namespace BUEHT

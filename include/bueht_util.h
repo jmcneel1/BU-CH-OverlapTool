@@ -1,6 +1,16 @@
 #ifndef _bueht_util
 #define _bueht_util
 
+/*
+  James McNeely
+
+  Some small utility functions used throughout the program.
+
+  So far, this included a function to calculate the factorial
+  and a binomial coefficient.
+  
+*/
+
 namespace BUEHT
 {
 

@@ -6,6 +6,19 @@
 namespace BUEHT
 {
 
+/*
+  James McNeely
+
+  The following definitions store parameters used by the program
+  including basis function information.
+  
+*/
+
+/*
+  A paramater object is a "row" of the parameters
+  listed below
+*/
+
 struct Parameter
 {
   short an;
@@ -46,8 +59,12 @@ struct Parameter
 
 };  // End of struct
 
-//{Atomic Number, n, l, Hii (hartree), Exp1, Exp2, Coeff1, Coeff2}
-//std::vector<Parameter> bueht_eht_parameters = {
+/*
+{Atomic Number, n, l, Hii (hartree), Exp1, Exp2, Coeff1, Coeff2}
+These are taken from Greg Landrum's YAeHMOP
+(https://github.com/greglandrum/yaehmop.git)
+*/
+
 Parameter bueht_eht_parameters [] = {
 {1,1,0,-0.499791,1.3000,0.0000,1.0000,0.0000}, // H 1s Updated yaehmop 
 {2,1,0,-0.859934,1.6880,0.0000,1.0000,0.0000}, // He 1s Updated yaehmop

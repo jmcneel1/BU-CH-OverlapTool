@@ -8,7 +8,9 @@
   James McNeely
 
   This is a simple tool that will calculate the overlap 
-  integral between shells on different atoms
+  integral between shells on different atoms. It is intended
+  to be used as a pedagogical tool perhaps by providing 
+  complementary information to a Walsh diagram...
 
   Thus will be prompted for the following:
 
