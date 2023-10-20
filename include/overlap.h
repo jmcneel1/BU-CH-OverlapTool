@@ -30,10 +30,19 @@ namespace BUEHT
       and proceeds to rotate the overlaps accordingly to
       get back to the input orientation.
 
+      For convenience here, I provide a derivation of the PrimitiveOverlap
+      function, where terms in the derivation are used in comments that follow
+
+      ---------------------------------------------
+
+      We start with the definition of a normalized spherical harmonic:
+
+      
+
     */
 
     /*
-      This defines the 
+      This defines the C coeffi
     */
 
     inline double Overlap_C_lmj ( const int & l, const int & m,
