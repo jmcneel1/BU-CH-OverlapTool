@@ -3,6 +3,17 @@
 
 #include "atom.h"
 
+/*
+
+  James McNeely
+
+  This header provides all the necessary functions to rotate Overlaps in the
+  prolate spheroidal coordinate system to the molecular system.
+
+  Derivations are explicitly given below
+
+*/
+
 namespace BUEHT
 {
 
