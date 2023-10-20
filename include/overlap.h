@@ -36,8 +36,8 @@ namespace BUEHT
       ---------------------------------------------
 
       We start with the definition of a normalized spherical harmonic:
-
-      
+   
+         
 
     */
 
