@@ -63,10 +63,28 @@ namespace BUEHT
           cosθ^(2k)(-1)^(l-k)))/(2^l*l!*(d cosθ)^(l+m)))
       d^(l+m)/(d cosθ)^(l+m) (l!/(k!(l-k)!)) cosθ^(2k)^(-1)^(l-k) =
         (-1)^(l-k)(2k)!*(cosθ)^(2k-l-m)*l!/(k!*(l-k)!*(2k-l-m)!)
+
+      So that
+
+      Y = (-1)^m*e^(imφ)*sqrt((2l+1)(l-m)!/(4π(l+m)!))*
+          ((sinθ^m * sum([k=0..l](l!/(k!(l-k)!))*
+          (2k)!*cosθ^(2k-l-m)(-1)^(l-k)/(2k-l-m)!))/(2^l*l!))
+
+      We now note that the factorials are only defined for 2k >= l+m, so
+
+      Y = (-1)^m*e^(imφ)*sqrt((2l+1)(l-m)!/(4π(l+m)!))*
+          ((sinθ^m * sum([k=1/2(l+m)..l](l!/(k!(l-k)!))*
+          (2k)!*cosθ^(2k-l-m)(-1)^(l-k)/(2k-l-m)!))/(2^l*l!))
+
+      Making the substitution j = l-k to standardize the summation
+
+        = (-1)^m*e^(imφ)*sqrt((2l+1)(l-m)!/(4π(l+m)!))*
+          ((sinθ^m * sum([k=0..1/2(l-m)](l!/((l-j)!(j)!))*
+          (2(l-j))!*cosθ^(2(l-j)-l-m)(-1)^(j)/(2(l-j)-l-m)!))/(2^l*l!))
     */
 
     /*
-      This defines the C coeffi
+      This defines the C coefficients discussed above...
     */
 
     inline double Overlap_C_lmj ( const int & l, const int & m,
