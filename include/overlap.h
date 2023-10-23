@@ -37,8 +37,32 @@ namespace BUEHT
 
       We start with the definition of a normalized spherical harmonic:
    
-         
+      φ = (2ξ)^(n+0.5)/sqrt((2n)!)*r^(n-1)e^(-ξr)Y(θ,φ)
 
+      We'll stick with the complex spherical harmonics, because the real 
+      spherical harmonics, as given below:
+
+      RYlm = (-1)^m/sqrt(2)*(Ylm + Ylm*) m > 0
+      RYlm = Yl0 m == 0
+      RYlm = (-1)^m/(i*sqrt(2))*(Yl|m| - Yl|m|*) m < 0
+
+      As such, any reccurence relations we derive from the complex SH
+      can be subsequently applied to real SH. This will be done later 
+      to very equivalence...
+
+      So ... the complex SH can be expressed as
+
+      Y = (-1)^m*sqrt((2l+1)(l-m)!/(4π(l+m)!))*P(cosθ)e^(imφ)
+        = (-1)^m*e^(imφ)*sqrt((2l+1)(l-m)!/(4π(l+m)!))*
+          ((sinθ^m * d^(l+m)(cosθ^2-1)^l)/(2^l*l!*(d cosθ)^(l+m)))
+      
+      If we do a binomial expansion of (cosθ^2-1)^l, we have
+
+      Y = (-1)^m*e^(imφ)*sqrt((2l+1)(l-m)!/(4π(l+m)!))*
+          ((sinθ^m * d^(l+m) sum([k=0..l](l!/(k!(l-k)!))*
+          cosθ^(2k)(-1)^(l-k)))/(2^l*l!*(d cosθ)^(l+m)))
+      d^(l+m)/(d cosθ)^(l+m) (l!/(k!(l-k)!)) cosθ^(2k)^(-1)^(l-k) =
+        (-1)^(l-k)(2k)!*(cosθ)^(2k-l-m)*l!/(k!*(l-k)!*(2k-l-m)!)
     */
 
     /*
