@@ -118,12 +118,15 @@ namespace BUEHT
       coordinate systems. Furthermore, the interatomic distance, R, is a constant to use in the 
       PSC.
 
-      In PSC, for a single value of φ, the coordinate is defined by an ellipse, and a point on 
-      the ellipse is defined by a hyperbola. The ellipse is defined in terms of two Foci
-      which are the atomic positions. An ellipse, as you'll recall, is defined by two coordinates 
-      for the length of the minor and major axes of the ellipse. We have that ra + rb = constant 
-      for an ellipse. The foci are related to the minor and major radii of an ellipse by 
-      f2 = u2 - v2, so 1/4R^2
+      In PSC, for a single value of φ, we use the choice of PSC where z = 1/2 * R * mu * nu,
+      x = 1/2 * R * sqrt( mu^2 - 1) * sqrt( 1 - nu^2 ) * cos(φ)
+      y = 1/2 * R * sqrt( mu^2 - 1) * sqrt( 1 - nu^2 ) * sin(φ)
+
+      We also know for points on the z-axes, x = y = 0, and z is defined as above.
+
+      We thus require mu^2 = 1 or nu^2 = 1 on the z-axis. For 
+
+
 
     */
 
