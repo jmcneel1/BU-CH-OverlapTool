@@ -79,8 +79,52 @@ namespace BUEHT
       Making the substitution j = l-k to standardize the summation
 
         = (-1)^m*e^(imφ)*sqrt((2l+1)(l-m)!/(4π(l+m)!))*
-          ((sinθ^m * sum([k=0..1/2(l-m)](l!/((l-j)!(j)!))*
+          ((sinθ^m * sum([j=0..1/2(l-m)](l!/((l-j)!(j)!))*
           (2(l-j))!*cosθ^(2(l-j)-l-m)(-1)^(j)/(2(l-j)-l-m)!))/(2^l*l!))
+
+        = (-1)^m * e^(imφ) * sqrt((2l+1)(l-m)!/(4π(l+m)!)) *
+          ( ( sinθ^m / (2^l*l!) * sum( [j=0..1/2(l-m)] (l!/((l-j)!(j)!)) *
+          ( 2(l-j))! * cosθ^(l-m-2j) * (-1)^(j) / 
+          ( l-m-2j )! )) )
+
+      Now let's collect some of the terms above into a coefficient, which is 
+      Overlap_C_lmj defined below
+
+        Clmj = sqrt((l-m)!/(l+m)!) * ( (2(l-j))! * (-1)^j )/(2^l * j! * (l-j)! * (l-m-2j)! )
+
+      This make the STO:
+
+        φ = (2ξ)^(n+0.5)/sqrt((2n)!) * r^(n-1) * e^(-ξr) * (-1)^m * e^(imφ) * sinθ^m * 
+          sqrt(2l+1/(4π)) * sum( [j=0..1/2(l-m)] Clmj * cosθ^(l-m-2j) ) 
+
+      If we now look forward a bit, and realize that the Kronecker delta 
+      δ(l1,l2) doesn't hold but δ(m1,m2) DOES hold moving from spherical to prolate 
+      spheroidal coordinates, we can express the overlap integral as follows (also notice that
+      the phase factor disappears because m is required to be an integer..., so
+      (-1)^(2m) is 1 ):
+
+        <φa|φb> = (2ξa)^(na+0.5) * (2ξb)^(nb+0.5) * sqrt( (2la+1) * (2lb+1) ) / 2 *
+                  Int[ sinθa^m * sinθb^m * ra^(na-1) * rb^(nb-1) * 
+                       e^(-ξara) * e^(-ξbrb) * 
+                       sum( [ja=0..1/2(la-m)] Clamja * cosθ^(la-m-2ja) ) *
+                       sum( [jb=0..1/2(lb-m)] Clbmjb * cosθ^(lb-m-2jb) )
+                  ,{θ,0,π},{r,0,inf}]
+
+      This integral is still not feasible to solve, because of the disparate coordinate
+      systems for the two atomic centers... now we move to prolate spheroidal coordinates
+
+      Here, we assume that the vector joining the atomic centers is placed upon the z-axis.
+      Without loss of generality, we can assume that φ is the same in both the PSC and spherical
+      coordinate systems. Furthermore, the interatomic distance, R, is a constant to use in the 
+      PSC.
+
+      In PSC, for a single value of φ, the coordinate is defined by an ellipse, and a point on 
+      the ellipse is defined by a hyperbola. The ellipse is defined in terms of two Foci
+      which are the atomic positions. An ellipse, as you'll recall, is defined by two coordinates 
+      for the length of the minor and major axes of the ellipse. We have that ra + rb = constant 
+      for an ellipse. The foci are related to the minor and major radii of an ellipse by 
+      f2 = u2 - v2, so 1/4R^2
+
     */
 
     /*
