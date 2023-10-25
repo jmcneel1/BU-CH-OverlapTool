@@ -111,7 +111,10 @@ namespace BUEHT
                   ,{θ,0,π},{r,0,inf}]
 
       This integral is still not feasible to solve, because of the disparate coordinate
-      systems for the two atomic centers... now we move to prolate spheroidal coordinates
+      systems for the two atomic centers... now we move to prolate spheroidal coordinates.
+
+      We first note that in our system contains a symmetry axis which is the vector
+      connecting the two atoms whose overlap integral is being calculated. 
 
       Here, we assume that the vector joining the atomic centers is placed upon the z-axis.
       Without loss of generality, we can assume that φ is the same in both the PSC and spherical
@@ -122,10 +125,26 @@ namespace BUEHT
       x = 1/2 * R * sqrt( mu^2 - 1) * sqrt( 1 - nu^2 ) * cos(φ)
       y = 1/2 * R * sqrt( mu^2 - 1) * sqrt( 1 - nu^2 ) * sin(φ)
 
-      We also know for points on the z-axes, x = y = 0, and z is defined as above.
+      The variables mu and nu thus have physical representations, in that when we hold
+      mu constant, nu is a prolate spheroid (an ellipse rotated around the z-axis by phi)
+      an if nu is held constant, we get hyperbola. Thus, any point is specified as a point
+      intersecting an ellipse hyperbola rotated along the symmetry axis by φ.
 
-      We thus require mu^2 = 1 or nu^2 = 1 on the z-axis. For 
+      A nice property that can be divined from the above equations is that for any value of φ,
+      the distance from any point to atom2 plus the distance to atom1 is a constant = R*mu. If
+      the distances are subtracted, the constant is R*nu. 
 
+      Let's first choose φ = 0, then we are in the xz plane. The distance between any point and
+      atom2 is sqrt((1/2*R*mu*nu-1/2*R)^2+(1/2*R*sqrt(mu^2-1)*sqrt(1-nu^2))^2)
+      = sqrt(1/4*R^2*(mu^2*nu^2-2*mu*nu+1+mu^2-mu^2*nu^2-1+nu^2))
+      = sqrt(1/4*R^2*(-2*mu*nu+mu^2+nu^2)) = 1/2 * R * (mu-nu)
+      For atom 1
+      = sqrt((1/2*R*mu*nu+1/2*R)^2+1/4*R^2*(mu^2-1)*(1-nu^2))
+      = sqrt(1/4*R^2*(mu^2*nu^2+2*mu*nu+1+mu^2-mu^2*nu^2-1+nu^2))
+      = sqrt(1/4*R^2*(2*mu*nu+mu^2+nu^2)) = 1/2 * R * (mu+nu)
+
+      This can be shown to hold for any value of φ, because for the foci, x=y=0, and the 
+      x and y coordinates when squared will be 1/2 * R * (mu+nu) (cosφ^2+sinφ^2) ...
 
 
     */
