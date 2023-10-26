@@ -146,6 +146,39 @@ namespace BUEHT
       This can be shown to hold for any value of φ, because for the foci, x=y=0, and the 
       x and y coordinates when squared will be 1/2 * R * (mu+nu) (cosφ^2+sinφ^2) ...
 
+      With the above results defining rA = 1/2 * R * (mu+nu) and rB = 1/2 * R * (mu-nu),
+      we now want to derive expressions for cosθa, cosθb, sinθa, and sinθb... so we'll
+      just use the law of cosines because we have all three lengths now...
+
+      cosθa = ( R^2 + rA^2 - rB^2 ) / ( 2 * R * rA )
+            = ( R^2 + (1/2*R*(mu+nu))^2 - (1/2*R*(mu-nu))^2 ) / ( 2 * R * 1/2 * R * (mu+nu) )
+            = ( 1/4 * R^2 * (4 + (mu+nu))^2 - (mu-nu)^2 ) / ( R^2 * (mu+nu) )
+            = (1 + 1/4*(mu^2 + nu^2 + 2*mu*nu - mu^2 - nu^2 + 2 * mu * nu ))/(mu+nu)
+            = (1+mu*nu)/(mu+nu)
+      cosθb =  ( R^2 + rB^2 - rA^2 ) / ( 2 * R * rB )
+            = ( R^2 + (1/2*R*(mu-nu))^2 - (1/2*R*(mu+nu))^2 ) / ( 2 * R * 1/2 * R * (mu-nu) )
+            = ( 1/4 * R^2 * (4 + (mu-nu))^2 - (mu+nu)^2 ) / ( R^2 * (mu-nu) )
+            = (1 + 1/4*(mu^2 + nu^2 - 2*mu*nu - mu^2 - nu^2 - 2 * mu * nu ))/(mu-nu)
+            = (1-mu*nu)/(mu-nu)
+      sinθa = sqrt(1-cosθa^2)
+            = sqrt(1-(1+mu*nu)^2/(mu+nu)^2)
+            = sqrt(((mu+nu)^2-(1+mu*nu)^2)/((mu+nu)^2))
+            = sqrt((mu^2+nu^2+2*mu*nu-1-2*mu*nu-mu^2*nu^2)/(mu+nu)^2)
+            = sqrt((mu^2+nu^2-1-mu^2*nu^2)/(mu+nu)^2)
+            = sqrt((mu^2+1)*(1-nu^2))/(mu+nu)
+      sinθb = sqrt(1-cosθb^2)
+            = sqrt(1-(1-mu*nu)^2/(mu-nu)^2)
+            = sqrt(((mu-nu)^2-(1-mu*nu)^2)/((mu-nu)^2))
+            = sqrt((mu^2+nu^2-2*mu*nu-1+2*mu*nu+mu^2*nu^2)/(mu-nu)^2)
+            = sqrt((mu^2+nu^2-1-mu^2*nu^2)/(mu-nu)^2)
+            = sqrt((mu^2+1)*(1-nu^2))/(mu-nu)
+
+      The integration volume element r^2*sinθ*dr*dθ*dφ also changes...
+
+      drA/du = 1/2 * R ... r^2 * dr = 1/4*R^2*(mu+nu)^2*1/2*R = 1/8 * R^3 * (mu+nu)^2
+      drA/dv = 1/2 * R ... r^2 * dr = 1/4*R^2*(mu+nu)^2*1/2*R = 1/8 * R^3 * (mu+nu)^2
+      d(sinθa)/du = 
+     
 
     */
 
