@@ -103,11 +103,12 @@ namespace BUEHT
       the phase factor disappears because m is required to be an integer..., so
       (-1)^(2m) is 1 ):
 
-        <φa|φb> = (2ξa)^(na+0.5) * (2ξb)^(nb+0.5) * sqrt( (2la+1) * (2lb+1) ) / 2 *
+        <φa|φb> = (2ξa)^(na+0.5) * (2ξb)^(nb+0.5) * sqrt( (2la+1) * (2lb+1) /
+                  ((2*na)!*(2*nb)!)) / 2 *
                   Int[ sinθa^m * sinθb^m * ra^(na-1) * rb^(nb-1) * 
                        e^(-ξara) * e^(-ξbrb) * 
-                       sum( [ja=0..1/2(la-m)] Clamja * cosθ^(la-m-2ja) ) *
-                       sum( [jb=0..1/2(lb-m)] Clbmjb * cosθ^(lb-m-2jb) )
+                       sum( [ja=0..1/2(la-m)] Clamja * cosθa^(la-m-2ja) ) *
+                       sum( [jb=0..1/2(lb-m)] Clbmjb * cosθb^(lb-m-2jb) )
                   ,{θ,0,π},{r,0,inf}]
 
       This integral is still not feasible to solve, because of the disparate coordinate
@@ -175,11 +176,50 @@ namespace BUEHT
 
       The integration volume element r^2*sinθ*dr*dθ*dφ also changes...
 
-      drA/du = 1/2 * R ... r^2 * dr = 1/4*R^2*(mu+nu)^2*1/2*R = 1/8 * R^3 * (mu+nu)^2
-      drA/dv = 1/2 * R ... r^2 * dr = 1/4*R^2*(mu+nu)^2*1/2*R = 1/8 * R^3 * (mu+nu)^2
-      d(sinθa)/du = 
-     
+      The matrix of derivatives is as follows:
 
+                          dx                          dy                    dz
+            ________________________________________________________________________
+           | - R * nu * sqrt(mu^2-1)*      - R * nu * sqrt(mu^2-1)*      1/2*R*mu
+      dnu  | Cos[phi]/(2*sqrt(1-nu^2))     Sin[phi]/(2*sqrt(1-nu^2))
+           |           | 
+           | R * mu * sqrt(1-nu^2)*        R * mu * sqrt(1-nu^2)*        1/2*R*nu
+      dmu  | Cos[phi]/(2*sqrt(mu^2-1))     Sin[phi]/(2*sqrt(mu^2-1))
+           |
+      dphi | - 1/2 * R * sqrt(mu^2-1) *     1/2 * R * sqrt(mu^2-1) *        0
+           | sqrt(1-nu^2)*Sin[phi]          sqrt(1-nu^2)*Sin[phi]
+
+      The determinant of this matrix is:
+
+      R^3/8 * (mu-nu) * (mu+nu)
+
+      Now we plug back in:
+
+      <φa|φb> = (2ξa)^(na+0.5) * (2ξb)^(nb+0.5) * sqrt( (2la+1) * (2lb+1) / ((2na)!*(2nb)!)) / 2 *
+                  Int[ (sqrt((mu^2+1)*(1-nu^2))/(mu+nu))^m * (sqrt((mu^2+1)*(1-nu^2))/(mu-nu))^m * 
+                       (1/2*R*(mu+nu))^(na-1) * (1/2*R*(mu-nu))^(nb-1) * 
+                       e^(-ξa(1/2*R*(mu+nu))) * e^(-ξb(1/2*R*(mu-nu))) * 
+                       sum( [ja=0..1/2(la-m)] Clamja * ((1+mu*nu)/(mu+nu))^(la-m-2ja) ) *
+                       sum( [jb=0..1/2(lb-m)] Clbmjb * ((1-mu*nu)/(mu-nu))^(lb-m-2jb) ) *
+                       R^3/8*(nu-mu)*(mu+nu)
+                  ,{mu,1,inf},{nu,-1,1}]
+
+              = (2ξa)^(na+0.5)*(2ξb)^(nb+0.5)*sqrt((2la+1)*(2lb+1)/((2na)!*(2nb)!)) / 2 *
+                  Int[ (R^(3+na-1+nb-1)*(mu^2+1)^m*(1-nu^2)^m *
+                       (mu+nu)^(-m+na-1) * (mu-nu)^(-m+nb-1) * 
+                       (1/2)^(na-1)*(1/2)^(nb-1) * 
+                       e^(-ξa(1/2*R*(mu+nu))) * e^(-ξb(1/2*R*(mu-nu))) * 
+                       sum( [ja=0..1/2(la-m)] Clamja * ((1+mu*nu)/(mu+nu))^(la-m-2ja) ) *
+                       sum( [jb=0..1/2(lb-m)] Clbmjb * ((1-mu*nu)/(mu-nu))^(lb-m-2jb) ) *
+                       1/8*(nu-mu)*(mu+nu)
+                  ,{mu,1,inf},{nu,-1,1}]
+              = (2ξa)^(na+0.5)*(2ξb)^(nb+0.5)*sqrt((2la+1)*(2lb+1)/((2na)!*(2nb)!)) / 2 *
+                  Int[ (R^(na+nb+1)*(mu^2+1)^m*(1-nu^2)^m
+                       (1/2)^(na+nb+1)* 
+                       e^(-ξa(1/2*R*(mu+nu))) * e^(-ξb(1/2*R*(mu-nu))) * 
+                       sum( [ja=0..1/2(la-m)]Clamja*(mu+nu)^(na-la+2ja)*((1+mu*nu))^(la-m-2ja))*
+                       sum( [jb=0..1/2(lb-m)]Clbmjb*(mu-nu)^(nb-lb+2jb)*((1-mu*nu))^(lb-m-2jb))*
+                  ,{mu,1,inf},{nu,-1,1}]
     */
 
     /*
