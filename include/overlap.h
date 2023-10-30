@@ -217,13 +217,17 @@ namespace BUEHT
                   Int[ (R^(na+nb+1)*(mu^2+1)^m*(1-nu^2)^m *
                        e^(-1/2*(ξa+ξb)*R*mu) * e^(-1/2*(ξa-ξb)*R*nu) * 
                        sum( [ja=0..1/2(la-m)]Clamja*(mu+nu)^(na-la+2ja)*((1+mu*nu))^(la-m-2ja))*
-                       sum( [jb=0..1/2(lb-m)]Clbmjb*(mu-nu)^(nb-lb+2jb)*((1-mu*nu))^(lb-m-2jb))*
+                       sum( [jb=0..1/2(lb-m)]Clbmjb*(mu-nu)^(nb-lb+2jb)*((1-mu*nu))^(lb-m-2jb))
                   ,{mu,1,inf},{nu,-1,1}]
 
             We can expand the terms as a binomial expansion:
 
-            (mu^2+1)^m = sum([k=0..m] mu^k)
-            ()^m
+            (mu^2+1)^m = sum([k=0..m] mu^2k)
+            (1-nu^2)^m = sum([k=0..m] (-1)^2k * nu^2k) = sum([k=0..m] nu^2k)
+                       => because m is an integer, so 2m is necessarily even
+            (mu+nu)^(na-la+2ja) = sum([k=0..na-la+2ja] mu^(na-la+2*ja-k) * nu^k )
+            (mu-nu)^(nb-lb+2jb) = sum([k=0..nb-lb+2jb] (-1)^k * mu^(nb-lb+2*jb-k) * nu^k )
+            (1+mu*nu)^(la-m-2ja) = 
     */
 
     /*
