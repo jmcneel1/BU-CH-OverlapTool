@@ -213,10 +213,9 @@ namespace BUEHT
                        sum( [jb=0..1/2(lb-m)] Clbmjb * ((1-mu*nu)/(mu-nu))^(lb-m-2jb) ) *
                        1/8*(nu-mu)*(mu+nu)
                   ,{mu,1,inf},{nu,-1,1}]
-              = (2ξa)^(na+0.5)*(2ξb)^(nb+0.5)*sqrt((2la+1)*(2lb+1)/((2na)!*(2nb)!)) / 2 *
-                  Int[ (R^(na+nb+1)*(mu^2+1)^m*(1-nu^2)^m
-                       (1/2)^(na+nb+1)* 
-                       e^(-ξa(1/2*R*(mu+nu))) * e^(-ξb(1/2*R*(mu-nu))) * 
+              = (ξa)^(na+0.5)*(ξb)^(nb+0.5)*sqrt((2la+1)*(2lb+1)/((2na)!*(2nb)!)) / 2 *
+                  Int[ (R^(na+nb+1)*(mu^2+1)^m*(1-nu^2)^m *
+                       e^(-1/2*(ξa+ξb)*R*mu) * e^(-1/2*(ξa-ξb)*R*nu) * 
                        sum( [ja=0..1/2(la-m)]Clamja*(mu+nu)^(na-la+2ja)*((1+mu*nu))^(la-m-2ja))*
                        sum( [jb=0..1/2(lb-m)]Clbmjb*(mu-nu)^(nb-lb+2jb)*((1-mu*nu))^(lb-m-2jb))*
                   ,{mu,1,inf},{nu,-1,1}]
