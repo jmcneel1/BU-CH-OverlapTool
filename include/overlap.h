@@ -219,6 +219,11 @@ namespace BUEHT
                        sum( [ja=0..1/2(la-m)]Clamja*(mu+nu)^(na-la+2ja)*((1+mu*nu))^(la-m-2ja))*
                        sum( [jb=0..1/2(lb-m)]Clbmjb*(mu-nu)^(nb-lb+2jb)*((1-mu*nu))^(lb-m-2jb))*
                   ,{mu,1,inf},{nu,-1,1}]
+
+            We can expand the terms as a binomial expansion:
+
+            (mu^2+1)^m = sum([k=0..m] mu^k)
+            ()^m
     */
 
     /*
