@@ -227,7 +227,18 @@ namespace BUEHT
                        => because m is an integer, so 2m is necessarily even
             (mu+nu)^(na-la+2ja) = sum([k=0..na-la+2ja] mu^(na-la+2*ja-k) * nu^k )
             (mu-nu)^(nb-lb+2jb) = sum([k=0..nb-lb+2jb] (-1)^k * mu^(nb-lb+2*jb-k) * nu^k )
-            (1+mu*nu)^(la-m-2ja) = 
+            (1+mu*nu)^(la-m-2ja) = sum([k=0..la-m-2ja] mu^k * nu^k )
+            (1-mu*nu)^(lb-m-2jb) = sum([k=0..lb-m-2jb] (-1)^k * mu^k * nu^k )
+
+            We now make variable susbstitutions ... where in order they will be ka, kb, 
+            pa, pb, qa, and qb:
+
+            (mu^2+1)^m = sum([ka=0..m] mu^2ka)
+            (1-nu^2)^m = sum([kb=0..m] nu^2kb)
+            (mu+nu)^(na-la+2ja) = sum([pa=0..na-la+2ja] mu^(na-la+2*ja-pa) * nu^pa )
+            (mu-nu)^(nb-lb+2jb) = sum([pb=0..nb-lb+2jb] (-1)^k * mu^(nb-lb+2*jb-pb) * nu^pb )
+            (1+mu*nu)^(la-m-2ja) = sum([qa=0..la-m-2ja] mu^qa * nu^qa )
+            (1-mu*nu)^(lb-m-2jb) = sum([qb=0..lb-m-2jb] (-1)^qb * mu^qb * nu^qb )
     */
 
     /*
