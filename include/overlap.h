@@ -222,23 +222,36 @@ namespace BUEHT
 
             We can expand the terms as a binomial expansion:
 
-            (mu^2+1)^m = sum([k=0..m] mu^2k)
-            (1-nu^2)^m = sum([k=0..m] (-1)^2k * nu^2k) = sum([k=0..m] nu^2k)
-                       => because m is an integer, so 2m is necessarily even
-            (mu+nu)^(na-la+2ja) = sum([k=0..na-la+2ja] mu^(na-la+2*ja-k) * nu^k )
-            (mu-nu)^(nb-lb+2jb) = sum([k=0..nb-lb+2jb] (-1)^k * mu^(nb-lb+2*jb-k) * nu^k )
-            (1+mu*nu)^(la-m-2ja) = sum([k=0..la-m-2ja] mu^k * nu^k )
-            (1-mu*nu)^(lb-m-2jb) = sum([k=0..lb-m-2jb] (-1)^k * mu^k * nu^k )
+            (mu^2+1)^m = sum([k=0..m] m!/(k!(m-k)!) * mu^2k)
+            (1-nu^2)^m = sum([k=0..m] m!/(k!(m-k)!) * (-1)^k * nu^2k) 
+            (mu+nu)^(na-la+2ja) = sum([k=0..na-la+2ja] (na-la+2ja)!/(k!(na-la+2ja-k)!) 
+                                                       * mu^(na-la+2*ja-k) * nu^k )
+            (mu-nu)^(nb-lb+2jb) = sum([k=0..nb-lb+2jb] (nb-lb+2jb)!/(k!(nb-lb+2jb-k)!) 
+                                                       * (-1)^k * mu^(nb-lb+2*jb-k) * nu^k )
+            (1+mu*nu)^(la-m-2ja) = sum([k=0..la-m-2ja] (la-m-2ja)!/(k!(la-m-2ja-k)!)
+                                                       * mu^k * nu^k )
+            (1-mu*nu)^(lb-m-2jb) = sum([k=0..lb-m-2jb] (lb-m-2jb)!/(k!(lb-m-2jb-k)!)
+                                                       * (-1)^k * mu^k * nu^k )
 
             We now make variable susbstitutions ... where in order they will be ka, kb, 
             pa, pb, qa, and qb:
 
-            (mu^2+1)^m = sum([ka=0..m] mu^2ka)
-            (1-nu^2)^m = sum([kb=0..m] nu^2kb)
-            (mu+nu)^(na-la+2ja) = sum([pa=0..na-la+2ja] mu^(na-la+2*ja-pa) * nu^pa )
-            (mu-nu)^(nb-lb+2jb) = sum([pb=0..nb-lb+2jb] (-1)^k * mu^(nb-lb+2*jb-pb) * nu^pb )
-            (1+mu*nu)^(la-m-2ja) = sum([qa=0..la-m-2ja] mu^qa * nu^qa )
-            (1-mu*nu)^(lb-m-2jb) = sum([qb=0..lb-m-2jb] (-1)^qb * mu^qb * nu^qb )
+            (mu^2+1)^m = sum([ka=0..m] m!/(ka!(m-ka)!) * mu^2ka)
+            (1-nu^2)^m = sum([kb=0..m] m!/(kb!(m-kb)!) * (-1)^kb * nu^2kb)
+            (mu+nu)^(na-la+2ja) = sum([pa=0..na-la+2ja] (na-la+2ja)!/(pa!(na-la+2ja-pa)!) 
+                                                        * mu^(na-la+2*ja-pa) * nu^pa )
+            (mu-nu)^(nb-lb+2jb) = sum([pb=0..nb-lb+2jb] (nb-lb+2jb)!/(pb!(na-la+2ja-pb)!) 
+                                                        * (-1)^pb * mu^(nb-lb+2*jb-pb) * nu^pb )
+            (1+mu*nu)^(la-m-2ja) = sum([qa=0..la-m-2ja] (la-m-2ja)!/(qa!(la-m-2ja-qa)!)
+                                                        * mu^qa * nu^qa )
+            (1-mu*nu)^(lb-m-2jb) = sum([qb=0..lb-m-2jb] (lb-m-2jb)!/(qb!(lb-m-2jb-qb)!)
+                                                        * (-1)^qb * mu^qb * nu^qb )
+
+            Now we combine terms ...
+
+            mu^(2*ka+na-la+2*ja-pa+nb-lb+2*jb-pb+qa+qb)
+            nu^(2*kb+pa+pb+qa+qb)
+            (-1)^(kb+pb+qb)
     */
 
     /*
