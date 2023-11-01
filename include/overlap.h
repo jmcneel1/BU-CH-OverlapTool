@@ -254,6 +254,11 @@ namespace BUEHT
             (-1)^(m-ka+kb+pb+qb) = (-1)^(m+ka+kb+pb+qb)
 
 
+            We now note that there are useful analytical integrals to use...
+
+            Int[x^n * e^-(a*x),1..Inf] 
+
+
             This completes the derivation....
     */
 
