@@ -178,6 +178,11 @@ OT
          F-2px  F-2py  F-2pz
    F-2s -0.084  0.000 -0.146
 
+          F-2s
+  F-2px  0.084
+  F-2py -0.000
+  F-2pz  0.146
+
 yaehmot
 
           F-2s
@@ -196,6 +201,11 @@ OT
 
          F-2px  F-2py  F-2pz
    F-2s -0.146  0.000 -0.084
+
+          F-2s
+  F-2px  0.146
+  F-2py -0.000
+  F-2pz  0.084
 
 yaehmot
 
@@ -216,6 +226,11 @@ OT
          F-2px  F-2py  F-2pz
    F-2s -0.168  0.000  0.000
 
+          F-2s
+  F-2px  0.168
+  F-2py -0.000
+  F-2pz -0.000
+
 yaehmot
 
           F-2s
@@ -235,6 +250,11 @@ OT
          F-2px  F-2py  F-2pz
    F-2s -0.146  0.000  0.084
 
+          F-2s
+  F-2px  0.146
+  F-2py -0.000
+  F-2pz -0.084
+
 yaehmot
 
           F-2s
@@ -253,6 +273,11 @@ OT
 
          F-2px  F-2py  F-2pz
    F-2s -0.084  0.000  0.146
+
+          F-2s
+  F-2px  0.084
+  F-2py -0.000
+  F-2pz -0.146
 
 yaehmot
 
