@@ -166,13 +166,13 @@ namespace BUEHT
             = sqrt(((mu+nu)^2-(1+mu*nu)^2)/((mu+nu)^2))
             = sqrt((mu^2+nu^2+2*mu*nu-1-2*mu*nu-mu^2*nu^2)/(mu+nu)^2)
             = sqrt((mu^2+nu^2-1-mu^2*nu^2)/(mu+nu)^2)
-            = sqrt((mu^2+1)*(1-nu^2))/(mu+nu)
+            = sqrt((mu^2-1)*(1-nu^2))/(mu+nu)
       sinθb = sqrt(1-cosθb^2)
             = sqrt(1-(1-mu*nu)^2/(mu-nu)^2)
             = sqrt(((mu-nu)^2-(1-mu*nu)^2)/((mu-nu)^2))
             = sqrt((mu^2+nu^2-2*mu*nu-1+2*mu*nu+mu^2*nu^2)/(mu-nu)^2)
             = sqrt((mu^2+nu^2-1-mu^2*nu^2)/(mu-nu)^2)
-            = sqrt((mu^2+1)*(1-nu^2))/(mu-nu)
+            = sqrt((mu^2-1)*(1-nu^2))/(mu-nu)
 
       The integration volume element r^2*sinθ*dr*dθ*dφ also changes...
 
@@ -196,7 +196,7 @@ namespace BUEHT
       Now we plug back in:
 
       <φa|φb> = (2ξa)^(na+0.5) * (2ξb)^(nb+0.5) * sqrt( (2la+1) * (2lb+1) / ((2na)!*(2nb)!)) / 2 *
-                  Int[ (sqrt((mu^2+1)*(1-nu^2))/(mu+nu))^m * (sqrt((mu^2+1)*(1-nu^2))/(mu-nu))^m * 
+                  Int[ (sqrt((mu^2-1)*(1-nu^2))/(mu+nu))^m * (sqrt((mu^2+1)*(1-nu^2))/(mu-nu))^m * 
                        (1/2*R*(mu+nu))^(na-1) * (1/2*R*(mu-nu))^(nb-1) * 
                        e^(-ξa(1/2*R*(mu+nu))) * e^(-ξb(1/2*R*(mu-nu))) * 
                        sum( [ja=0..1/2(la-m)] Clamja * ((1+mu*nu)/(mu+nu))^(la-m-2ja) ) *
@@ -205,7 +205,7 @@ namespace BUEHT
                   ,{mu,1,inf},{nu,-1,1}]
 
               = (2ξa)^(na+0.5)*(2ξb)^(nb+0.5)*sqrt((2la+1)*(2lb+1)/((2na)!*(2nb)!)) / 2 *
-                  Int[ (R^(3+na-1+nb-1)*(mu^2+1)^m*(1-nu^2)^m *
+                  Int[ (R^(3+na-1+nb-1)*(mu^2-1)^m*(1-nu^2)^m *
                        (mu+nu)^(-m+na-1) * (mu-nu)^(-m+nb-1) * 
                        (1/2)^(na-1)*(1/2)^(nb-1) * 
                        e^(-ξa(1/2*R*(mu+nu))) * e^(-ξb(1/2*R*(mu-nu))) * 
@@ -214,7 +214,7 @@ namespace BUEHT
                        1/8*(nu-mu)*(mu+nu)
                   ,{mu,1,inf},{nu,-1,1}]
               = (ξa)^(na+0.5)*(ξb)^(nb+0.5)*sqrt((2la+1)*(2lb+1)/((2na)!*(2nb)!)) / 2 *
-                  Int[ (R^(na+nb+1)*(mu^2+1)^m*(1-nu^2)^m *
+                  Int[ (R^(na+nb+1)*(mu^2-1)^m*(1-nu^2)^m *
                        e^(-1/2*(ξa+ξb)*R*mu) * e^(-1/2*(ξa-ξb)*R*nu) * 
                        sum( [ja=0..1/2(la-m)]Clamja*(mu+nu)^(na-la+2ja)*((1+mu*nu))^(la-m-2ja))*
                        sum( [jb=0..1/2(lb-m)]Clbmjb*(mu-nu)^(nb-lb+2jb)*((1-mu*nu))^(lb-m-2jb))
@@ -222,7 +222,7 @@ namespace BUEHT
 
             We can expand the terms as a binomial expansion:
 
-            (mu^2+1)^m = sum([k=0..m] m!/(k!(m-k)!) * mu^2k)
+            (mu^2-1)^m = sum([k=0..m] m!/(k!(m-k)!) * (-1)^(m-k) * mu^2k)
             (1-nu^2)^m = sum([k=0..m] m!/(k!(m-k)!) * (-1)^k * nu^2k) 
             (mu+nu)^(na-la+2ja) = sum([k=0..na-la+2ja] (na-la+2ja)!/(k!(na-la+2ja-k)!) 
                                                        * mu^(na-la+2*ja-k) * nu^k )
@@ -236,7 +236,7 @@ namespace BUEHT
             We now make variable susbstitutions ... where in order they will be ka, kb, 
             pa, pb, qa, and qb:
 
-            (mu^2+1)^m = sum([ka=0..m] m!/(ka!(m-ka)!) * mu^2ka)
+            (mu^2+1)^m = sum([ka=0..m] m!/(ka!(m-ka)!) * (-1)^(m-ka) * mu^2ka)
             (1-nu^2)^m = sum([kb=0..m] m!/(kb!(m-kb)!) * (-1)^kb * nu^2kb)
             (mu+nu)^(na-la+2ja) = sum([pa=0..na-la+2ja] (na-la+2ja)!/(pa!(na-la+2ja-pa)!) 
                                                         * mu^(na-la+2*ja-pa) * nu^pa )
@@ -251,7 +251,10 @@ namespace BUEHT
 
             mu^(2*ka+na-la+2*ja-pa+nb-lb+2*jb-pb+qa+qb)
             nu^(2*kb+pa+pb+qa+qb)
-            (-1)^(kb+pb+qb)
+            (-1)^(m-ka+kb+pb+qb) = (-1)^(m+ka+kb+pb+qb)
+
+
+            This completes the derivation....
     */
 
     /*
