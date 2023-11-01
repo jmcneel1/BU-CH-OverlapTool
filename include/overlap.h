@@ -367,10 +367,7 @@ namespace BUEHT
                       termqb /= (double)factorial(lb-mb-2*jb-qb);
                       termqb /= (double)factorial(qb);
                       sum1+= termqb*
-                           //std::pow(-1.0,-ka-kb+nb-pb)*
                            std::pow(-1.0,ka+kb+ma+pb+qb)*
-                           //Overlap_B(2*kb+qa+qb+na-la+2*ja-pa+nb-lb+2*jb-pb,rhob)*
-                           //Overlap_A(2.0*ka+qa+qb+pa+pb,rhoa); 
                            Overlap_B(2*ka+pa+pb+qa+qb,rhob)*
                            Overlap_A(2*kb+na-la+2*ja+nb-lb+2*jb-pa-pb+qa+qb,rhoa);
                     }
