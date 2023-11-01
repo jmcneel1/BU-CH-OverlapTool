@@ -256,14 +256,60 @@ namespace BUEHT
 
             We now note that there are useful analytical integrals to use...
 
-            Int[x^n * e^-(a*x),1..Inf] 
+            Int[x^n * e^-(a*x),1..Inf] =   Int[x^n * e^-(a*x),0..Inf] 
+                                          -Int[x^n * e^-(a*x),0..1]
+                                        =  n!/a^(n+1) 
+                                         - n!/a^(n+1)*[1-e^(-a)*
+                                           sum([i=0..n] a^i/i!)]
+                                        = n!/a^(n+1) * e^(-a) * sum([i=0..n] a^i/i!)
+                
+            Int[x^n * e^-(a*x),-1..1] =   Int[x^n * e^-(a*x),0..1] +
+                                          Int[x^n * e^-(a*x),-1..0]
+                                      =   Int[x^n * e^-(a*x),0..1] -
+                                          Int[x^n * e^-(a*x),0..-1]
+                                      =   n!/a^(n+1)*[1-e^(-a)*
+                                          sum([i=0..n] a^i/i!)]
+                                         -n!/a^(n+1)*[1-e^(a)*
+                                          sum([i=0..n] (-a)^i/i!)]
+                                      =   n!/a^(n+1)*[-e^(-a)*
+                                          sum([i=0..n] a^i/i!)
+                                         +e^(a)*
+                                          sum([i=0..n] (-a)^i/i!)]
 
 
             This completes the derivation....
     */
 
+   /*
+     We also note here our choise of coordinate system throughout the following:
+
+     We assume that the z axis goes from the second atom to the first atom...
+
+     Thus, the following "signs" are used:
+     
+     <s|s> = +
+     <s|pz> = +
+     <pz|s> = -
+     <s|z2> = +
+     <z2|s> = +
+     <z2|pz> = +
+     <pz|z2> = -
+     <px|px> = +
+     <py|py> = +
+     <px|xz> = +
+     <xz|px> = -
+     <py|yz> = +
+     <yz|py> = -
+     <z2|z2> = +
+     <xz|xz> = -
+     <yz|yz> = -
+     <xy|xy> = +
+     <x2y2|x2y2> = +
+
+   */
+
     /*
-      This defines the C coefficients discussed above...
+      This defines the C coefficients discussed above on line 93...
     */
 
     inline double Overlap_C_lmj ( const int & l, const int & m,
@@ -275,6 +321,9 @@ namespace BUEHT
              factorial(l-m-2*j));
     }
 
+    // This defines the integral shown above on lines 259-264
+    // Int[x^n*e^(-ax),{x,1,Infinity}]
+
     double Overlap_A ( const int & n, const double & a )
     {
       double sum = 0.0;
@@ -285,6 +334,9 @@ namespace BUEHT
       }
       return std::exp(-a)*double(factorial(n))/std::pow(a,n+1)*sum;
     }
+
+    // This defines the integral shown above on lines 266-277
+    // Int[x^n*e^(-ax),{x,-1,1}]
 
     double Overlap_B ( const int & n, const double & a )
     {
@@ -308,6 +360,11 @@ namespace BUEHT
       }
       return factorial(n)/std::pow(a,n+1)*(-std::exp(-a)*sum1+std::exp(a)*sum2);
     }
+
+    // Implementation of the working equations. See the derivation above
+    // for details...
+    // We use a lot of temp variables to minimize floating point operations
+    // They should be fairly easily to follow by the names... termja, termjb, etc...
 
     double PrimitiveOverlap (int na, int la, int ma, int nb, int lb, int mb,
                              double zeta1, double zeta2,
@@ -389,6 +446,11 @@ namespace BUEHT
              sum1;
     }
 
+    /*
+      <s|s> ... because s orbitals are spherical, we don't need to rotate
+      from the prolate spheroidal to molecular frame. Makes things easier...
+    */
+
     double OverlapSS (const BasisFunction & bf1,
                     const BasisFunction & bf2,
                     const Atom & atom1,
@@ -409,6 +471,17 @@ namespace BUEHT
         std::exit(1);
       }
     }   
+
+    /*
+      <s|p> ... In prolate spheroidal, the sigma overlap is between
+      s and pz, and there is no pi overlap...
+
+      We thus have a single overlap that is then rotated to the molecular frame
+
+      We return a vector of length three that has the following items (in order):
+
+      <s|px>, <s|py>, <s|pz> or the conjugates
+    */
 
     std::vector<double> OverlapSP ( const BasisFunction & bf1,
                        const BasisFunction & bf2,
@@ -434,8 +507,8 @@ namespace BUEHT
                                        bf2.GetN(),bf2.GetL(),0,
                                        bf1.GetExponent(0),bf2.GetExponent(0),
                                        tatom1, tatom2 );
-        ovlp[2] = ( bf2.GetL() == 0 ) ? -spz_overlap : spz_overlap;
-        RotateSP(ovlp,atom1,atom2,distance);
+        ovlp[2] = ( bf2.GetL() == 0 ) ? -spz_overlap : spz_overlap; // line 291
+        RotateSP(ovlp,atom1,atom2,distance); // Move to the molecular frame
         return ovlp;
       }
       else
@@ -444,6 +517,15 @@ namespace BUEHT
         std::exit(1);
       }
     }   
+
+    /*
+      <p|p> ... In prolate spheroidal, the sigma overlap is between
+      pz and pz, and pi overlap is <px|px> = <py|py>...
+
+      We thus have three overlaps that are then rotated to the molecular frame
+
+      We return a vector of length nine 
+    */
 
     std::vector<double> OverlapPP ( const BasisFunction & bf1,
                                     const BasisFunction & bf2,
@@ -499,6 +581,21 @@ namespace BUEHT
         std::exit(1);
       }
     }    
+
+     /*
+      <s|d> ... In prolate spheroidal, the sigma overlap is between
+      s and z2, and no pi overlap
+
+      We thus have one overlap that is then rotated to the molecular frame
+
+      We return a vector of length 5 in the order:
+
+      <s|xy>, <s|yz>, <s|z2>, <s|xz>, <s|x2y2>
+
+      For double zeta, we have the following:
+
+      <s|d> = c1 * <s|d1> + c2 * <s|d2>
+    */
 
     std::vector<double> OverlapSD ( const BasisFunction & bf1,
                        const BasisFunction & bf2,
@@ -577,6 +674,23 @@ namespace BUEHT
         std::exit(1);
       }
     } 
+
+    /*
+      <p|d> ... In prolate spheroidal, the sigma overlap is between
+      pz and z2, and pi overlap is between px/xz and py/yz
+
+      We thus have three overlap that is then rotated to the molecular frame
+
+      We return a vector of length 15 in the order:
+
+      <px|xy>, <px|yz>, <px|z2>, <px|xz>, <px|x2y2>,
+      <py|xy>, <py|yz>, <py|z2>, <py|xz>, <py|x2y2>,
+      <pz|xy>, <pz|yz>, <pz|z2>, <pz|xz>, <pz|x2y2>
+
+      For double zeta, we have the following:
+
+      <p|d> = c1 * <s|d1> + c2 * <s|d2>
+    */
 
     std::vector<double> OverlapPD ( const BasisFunction & bf1,
                        const BasisFunction & bf2,
