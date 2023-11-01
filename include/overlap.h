@@ -689,7 +689,7 @@ namespace BUEHT
 
       For double zeta, we have the following:
 
-      <p|d> = c1 * <s|d1> + c2 * <s|d2>
+      <p|d> = c1 * <p|d1> + c2 * <p|d2>
     */
 
     std::vector<double> OverlapPD ( const BasisFunction & bf1,
@@ -798,6 +798,27 @@ namespace BUEHT
         std::exit(1);
       }
     } 
+
+     /*
+      <d|d> ... In prolate spheroidal, the sigma overlap is between
+      z2 and z2, and pi overlap is between xz/xz and yz/yz, and delta
+      is between xy/xy and x2y2/x2y2
+
+      We thus have five overlaps that are then rotated to the molecular frame
+
+      We return a vector of length 25 in the order:
+
+      <xy|xy>, <xy|yz>, <xy|z2>, <xy|xz>, <xy|x2y2>,
+      <yz|xy>, <yz|yz>, <yz|z2>, <yz|xz>, <yz|x2y2>,
+      <z2|xy>, <z2|yz>, <z2|z2>, <z2|xz>, <z2|x2y2>,
+      <xz|xy>, <xz|yz>, <xz|z2>, <xz|xz>, <xz|x2y2>,
+      <x2y2|xy>, <x2y2|yz>, <x2y2|z2>, <x2y2|xz>, <x2y2|x2y2>
+
+      For double zeta, we have the following:
+
+      <d|d> = c1 * c3 * <d1|d3> + c1 * c4 * <d1|d4> +
+              c2 * c3 * <d2|d3> + c2 * c4 * <d2|d4>
+    */
 
     std::vector<double> OverlapDD ( const BasisFunction & bf1,
                        const BasisFunction & bf2,

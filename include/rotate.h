@@ -73,8 +73,6 @@ namespace BUEHT
                   const double & distance )
   {
     double xy_norm, cosbeta, sinbeta, cosalpha, sinalpha;
-    // Note we add the minus sign here because in the sigma overlap, one of the
-    // pz orbitals is "flipped".
     double sigma = ovlp[8];
     double pi = ovlp[0];
     std::vector<double> coord1 = atom1.GetCoordinates();
