@@ -149,6 +149,26 @@ int main ()
       std::cout << std::setw(7) << std::fixed << std::setprecision(3) << overlap[2] << "\n\n";
     }
   }
+  else if ( l1 == 1 && l2 == 1 )
+  {
+      std::vector<double> overlap = BUEHT::OverlapPP(bf1,bf2,atom1,atom2);
+      std::cout << "\n";
+      std::cout << std::setw(14) << BUEHT::bueht_atomic_symbols[atomicnum2-1]+"-"+std::to_string(n2)+"px";
+      std::cout << std::setw(7) <<  BUEHT::bueht_atomic_symbols[atomicnum2-1]+"-"+std::to_string(n2)+"py";
+      std::cout << std::setw(7) <<  BUEHT::bueht_atomic_symbols[atomicnum2-1]+"-"+std::to_string(n2)+"pz" << std::endl;;
+      std::cout << std::setw(7) << BUEHT::bueht_atomic_symbols[atomicnum1-1]+"-"+std::to_string(n1)+"px";
+      std::cout << std::setw(7) << std::fixed << std::setprecision(3) << overlap[0];
+      std::cout << std::setw(7) << std::fixed << std::setprecision(3) << overlap[1];
+      std::cout << std::setw(7) << std::fixed << std::setprecision(3) << overlap[2] << "\n";
+      std::cout << std::setw(7) << BUEHT::bueht_atomic_symbols[atomicnum1-1]+"-"+std::to_string(n1)+"py";
+      std::cout << std::setw(7) << std::fixed << std::setprecision(3) << overlap[3];
+      std::cout << std::setw(7) << std::fixed << std::setprecision(3) << overlap[4];
+      std::cout << std::setw(7) << std::fixed << std::setprecision(3) << overlap[5] << "\n";
+      std::cout << std::setw(7) << BUEHT::bueht_atomic_symbols[atomicnum1-1]+"-"+std::to_string(n1)+"pz";
+      std::cout << std::setw(7) << std::fixed << std::setprecision(3) << overlap[6];
+      std::cout << std::setw(7) << std::fixed << std::setprecision(3) << overlap[7];
+      std::cout << std::setw(7) << std::fixed << std::setprecision(3) << overlap[8] << "\n\n";
+  }
   else if ( (l1 == 0 && l2 == 2) || (l1 == 2 && l2 == 0) ) // One S and one D shell
   {
     std::vector<double> overlap = BUEHT::OverlapSD(bf1,bf2,atom1,atom2);

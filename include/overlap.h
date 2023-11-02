@@ -283,23 +283,23 @@ namespace BUEHT
    /*
      We also note here our choise of coordinate system throughout the following:
 
-     We assume that the z axis goes from the second atom to the first atom...
+     We assume that the z axis goes from the first atom to the second atom...
 
      Thus, the following "signs" are used:
      
      <s|s> = +
-     <s|pz> = +
-     <pz|s> = -
+     <s|pz> = -
+     <pz|s> = +
      <s|z2> = +
      <z2|s> = +
-     <z2|pz> = +
-     <pz|z2> = -
+     <z2|pz> = -
+     <pz|z2> = +
      <px|px> = +
      <py|py> = +
-     <px|xz> = +
-     <xz|px> = -
-     <py|yz> = +
-     <yz|py> = -
+     <px|xz> = -
+     <xz|px> = +
+     <py|yz> = -
+     <yz|py> = +
      <z2|z2> = +
      <xz|xz> = -
      <yz|yz> = -
@@ -507,7 +507,7 @@ namespace BUEHT
                                        bf2.GetN(),bf2.GetL(),0,
                                        bf1.GetExponent(0),bf2.GetExponent(0),
                                        tatom1, tatom2 );
-        ovlp[2] = ( bf2.GetL() == 0 ) ? -spz_overlap : spz_overlap; // line 291
+        ovlp[2] = ( bf2.GetL() == 0 ) ? spz_overlap : -spz_overlap; // line 291
         RotateSP(ovlp,atom1,atom2,distance); // Move to the molecular frame
         return ovlp;
       }
@@ -787,8 +787,8 @@ namespace BUEHT
                                                                  tatom1, tatom2 );
           }
         }
-        ovlp[12] = (bf1.GetL() == 1) ? -pzz2_overlap : pzz2_overlap;
-        ovlp[3] = (bf1.GetL() == 1) ? pxxz_overlap : -pxxz_overlap;
+        ovlp[12] = (bf1.GetL() == 1) ? pzz2_overlap : -pzz2_overlap;
+        ovlp[3] = (bf1.GetL() == 1) ? -pxxz_overlap : pxxz_overlap;
         RotatePD(ovlp,atom1,atom2,distance);
         return ovlp;
       }
