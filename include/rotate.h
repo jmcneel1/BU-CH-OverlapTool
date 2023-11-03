@@ -521,13 +521,14 @@ namespace BUEHT
       sinalpha = coord2[1]/xy_norm;
       sinbeta = xy_norm/distance;
     }
+    std::cout << sigma << "\n";
     cosbeta = coord2[2]/distance;
     std::vector<double> rotmatrix (25,0.0);
-    rotmatrix[0] = cosbeta*(cosalpha*cosalpha-sinalpha*sinalpha);
-    rotmatrix[1] = -cosalpha*sinbeta;
-    rotmatrix[3] = sinalpha*sinbeta;
-    rotmatrix[4] = -2.0*cosbeta*sinalpha*cosalpha;
-    rotmatrix[5] = sinbeta*(cosalpha*cosalpha-sinalpha*sinalpha);
+    rotmatrix[0] = cosbeta*(cosalpha*cosalpha-sinalpha*sinalpha); // xy-xy
+    rotmatrix[1] = -cosalpha*sinbeta; // xy-yz
+    rotmatrix[3] = sinalpha*sinbeta; // xy-xz
+    rotmatrix[4] = -2.0*cosbeta*sinalpha*cosalpha; //xy-x2y2
+    rotmatrix[5] = sinbeta*(cosalpha*cosalpha-sinalpha*sinalpha); 
     rotmatrix[6] = cosalpha*cosbeta;
     rotmatrix[8] = -sinalpha*cosbeta;
     rotmatrix[9] = -2.0*sinbeta*sinalpha*cosalpha;
