@@ -1,0 +1,20 @@
+
+Ethane
+
+geometry
+2
+1 Ti 0.0 0.0 0.0
+2 Ti -.84437476868996207554 1.46249999999976722105 -.97500000000023277891
+
+molecular
+
+charge
+0
+
+print
+Overlap
+Overlap Population
+Reduced overlap population
+charge matrix
+wavefunction
+end_print
