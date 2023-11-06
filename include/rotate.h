@@ -521,29 +521,31 @@ namespace BUEHT
       sinalpha = coord2[1]/xy_norm;
       sinbeta = xy_norm/distance;
     }
-    std::cout << sigma << "\n";
     cosbeta = coord2[2]/distance;
     std::vector<double> rotmatrix (25,0.0);
     rotmatrix[0] = cosbeta*(cosalpha*cosalpha-sinalpha*sinalpha); // xy-xy
     rotmatrix[1] = -cosalpha*sinbeta; // xy-yz
     rotmatrix[3] = sinalpha*sinbeta; // xy-xz
     rotmatrix[4] = -2.0*cosbeta*sinalpha*cosalpha; //xy-x2y2
-    rotmatrix[5] = sinbeta*(cosalpha*cosalpha-sinalpha*sinalpha); 
-    rotmatrix[6] = cosalpha*cosbeta;
-    rotmatrix[8] = -sinalpha*cosbeta;
-    rotmatrix[9] = -2.0*sinbeta*sinalpha*cosalpha;
-    rotmatrix[10] = sqrt3*sinalpha*cosalpha*sinbeta*sinbeta;
-    rotmatrix[11] = sqrt3*sinbeta*sinalpha*cosbeta;
-    rotmatrix[13] = sqrt3*sinbeta*cosalpha*cosbeta;
-    rotmatrix[14] = sqrt3*0.5*sinbeta*sinbeta*(cosalpha*cosalpha-sinalpha*sinalpha);
-    rotmatrix[15] = 2*cosbeta*cosalpha*sinbeta*sinalpha;
-    rotmatrix[16] = sinalpha*(cosbeta*cosbeta-sinbeta*sinbeta); 
-    rotmatrix[18] = cosalpha*(cosbeta*cosbeta-sinbeta*sinbeta);
-    rotmatrix[19] = -sqrt3*sinbeta*cosbeta;
-    rotmatrix[20] = sinalpha*cosalpha*(1.0+cosbeta*cosbeta);
-    rotmatrix[21] = -cosbeta*sinalpha*sinbeta;
-    rotmatrix[23] = -cosbeta*cosalpha*sinbeta;
-    rotmatrix[24] = 0.5*(cosalpha*cosalpha-sinalpha*sinalpha)*(1.0+cosbeta*cosbeta);
+    rotmatrix[5] = sinbeta*(cosalpha*cosalpha-sinalpha*sinalpha);  //yz-xy
+    rotmatrix[6] = cosalpha*cosbeta; // yz-yz
+    rotmatrix[8] = -sinalpha*cosbeta; // yz-xz
+    rotmatrix[9] = -2.0*sinbeta*sinalpha*cosalpha; // yz-x2y2
+    rotmatrix[10] = sqrt3*sinalpha*cosalpha*sinbeta*sinbeta; //z2-xy
+    rotmatrix[11] = sqrt3*sinbeta*sinalpha*cosbeta; //z2-yz
+    rotmatrix[12] = 1.0-1.5*sinbeta*sinbeta; //z2-z2
+    rotmatrix[13] = sqrt3*sinbeta*cosalpha*cosbeta; //z2-xz
+    rotmatrix[14] = sqrt3*0.5*sinbeta*sinbeta*(cosalpha*cosalpha-sinalpha*sinalpha); //z2-x2y2
+    rotmatrix[15] = 2.0*cosbeta*cosalpha*sinbeta*sinalpha; // xz-xy
+    rotmatrix[16] = sinalpha*(cosbeta*cosbeta-sinbeta*sinbeta); // xz-yz
+    rotmatrix[17] = -sqrt3*cosbeta*sinbeta; // xz-z2
+    rotmatrix[18] = cosalpha*(cosbeta*cosbeta-sinbeta*sinbeta); // xz-xz
+    rotmatrix[19] = sinbeta*cosbeta*(cosalpha*cosalpha-sinalpha*sinalpha); // xz-x2y2
+    rotmatrix[20] = sinalpha*cosalpha*(1.0+cosbeta*cosbeta); // x2y2-xy
+    rotmatrix[21] = -cosbeta*sinalpha*sinbeta; // x2y2-yz
+    rotmatrix[22] = sqrt3*0.5*sinbeta*sinbeta; // x2y2-z2
+    rotmatrix[23] = -cosbeta*cosalpha*sinbeta; // x2y2-xz
+    rotmatrix[24] = 0.5*(cosalpha*cosalpha-sinalpha*sinalpha)*(1.0+cosbeta*cosbeta); // x2y2-x2y2
     for ( unsigned int i = 0; i < 5; i++ )
     {
       for ( unsigned int j = i; j < 5; j++ )
