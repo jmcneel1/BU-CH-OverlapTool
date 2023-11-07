@@ -392,8 +392,10 @@ namespace BUEHT
                pi * ( sinbeta*sqrt3*sinbeta*cosbeta ); // pz-dz2
     ovlp[13] = sigma*cosbeta*sqrt3*sinbeta*cosalpha*cosbeta +
                pi * ( -sinbeta*cosalpha*(cosbeta*cosbeta-sinbeta*sinbeta) ); // pz-dxz
-    ovlp[14] = sigma*cosbeta*sqrt3*0.5*sinbeta*sinbeta*(cosalpha*cosalpha-sinalpha*sinalpha) +
-               pi * ( sinbeta*sqrt3*sinbeta*cosbeta ); // pz-dx2-y2
+    // ovlp[14] = sigma*cosbeta*sqrt3*0.5*sinbeta*sinbeta*(cosalpha*cosalpha-sinalpha*sinalpha) +
+    //           pi * ( sinbeta*sqrt3*sinbeta*cosbeta ); // pz-dx2-y2
+    ovlp[14] = sigma*cosbeta*sqrt3*0.5*sinbeta*sinbeta*(cosalpha*cosalpha-sinalpha*sinalpha) -
+               pi * sinbeta*cosbeta*sinbeta*( cosalpha*cosalpha-sinalpha*sinalpha ); // pz-dx2-y2
   }
 
   void RotateDD ( std::vector<double> & ovlp,

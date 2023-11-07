@@ -118,7 +118,7 @@ ${nz}
 END
 echo "YAEHMOP" >> ti2.txt
 echo " " >> ti2.txt
-cp ../../yaehmop/benchmark_check/ti2_0_0.inp yaehmop/ti2_${i}_${j}.inp
+cp ../../yaehmop/benchmark/ti2_0_0.inp yaehmop/ti2_${i}_${j}.inp
 sed -i "s/2\ Ti\ 0.0\ 0.0\ 1.95/2\ Ti\ ${nx}\ ${ny}\ ${nz}/g" yaehmop/ti2_${i}_${j}.inp
 cd yaehmop
 ../../../yaehmop/bind ti2_${i}_${j}.inp
