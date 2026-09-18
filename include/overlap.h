@@ -326,12 +326,25 @@ namespace BUEHT
 
     double Overlap_A ( const int & n, const double & a )
     {
+      if ( std::abs(a) < 1e-8 ) 
+      {
+        if ( (n%2) == 0 )
+        {
+	  std::cout << "A: " << 2.0/((double)(n+1)) << "\n";
+          return 2.0/((double)(n+1));
+        }
+        else
+        {
+	  std::cout << "A: 0.0\n";
+          return 0.0;
+        }
+      }
       double sum = 0.0;
       for ( unsigned int i = 0; i <= n; i++ )
       {
-        
         sum+=std::pow(a,i)/double(factorial(i));
       }
+      std::cout << "A: " << std::exp(-a)*double(factorial(n))/std::pow(a,n+1)*sum << "\n";
       return std::exp(-a)*double(factorial(n))/std::pow(a,n+1)*sum;
     }
 
@@ -346,10 +359,12 @@ namespace BUEHT
       {
         if ( (n%2) == 0 )
         {
+	  std::cout << "B: " << 2.0/((double)(n+1)) << "\n";
           return 2.0/((double)(n+1));
         }
         else
         {
+	  std::cout << "B: 0.0\n";
           return 0.0;
         }
       }
@@ -358,6 +373,7 @@ namespace BUEHT
         sum1+=std::pow(a,i)/factorial(i);
         sum2+=std::pow(-a,i)/factorial(i);
       }
+      std::cout << "B: " << factorial(n)/std::pow(a,n+1)*(-std::exp(-a)*sum1+std::exp(a)*sum2) << "\n";
       return factorial(n)/std::pow(a,n+1)*(-std::exp(-a)*sum1+std::exp(a)*sum2);
     }
 
@@ -382,6 +398,28 @@ namespace BUEHT
       ja_end = (la-ma)/2;
       jb_end = (lb-mb)/2;
       termpre = std::pow((double)factorial(ma),2);
+
+      // Special case when the two basis functions are at the same location.
+      // In this case we can use spherical coordinates
+
+      if ( distance < 1e-3 )
+      {
+        if ( la != lb ) return 0;
+
+        // Because la == lb and ma == mb, we only need to deal with the
+        // radial portion of the functions.
+        
+        // Int[ (2ξa)^(na+0.5) * (2ξb)^(nb+0.5) * r^2 * r^(na-1) * r^(nb-1) *
+        //      e^(-ξar) * e^(-ξbr), {r,0,inf} ]
+        // = (2ξa)^(na+0.5) * (2ξb)^(nb+0.5) * Int[ r^(na+nb) * e^(-(ξa+ξb)r), 
+        //                                          {r,0,inf} ]
+        // = (2ξa)^(na+0.5) * (2ξb)^(nb+0.5) * (na+nb)! / (ξa+ξb)^(na+nb+1)
+
+        return std::pow(2*zeta1,na+0.5) * std::pow(2*zeta2,nb+0.5) /
+               std::pow(((double)factorial(2*na)*(double)factorial(2*nb)),0.5)* 
+               (double)factorial(na+nb) / std::pow(zeta1+zeta2,na+nb+1);
+      }
+
       for ( unsigned int ja = 0; ja <= ja_end; ja++ )
       {
         int pa_end = na-la+2*ja;
