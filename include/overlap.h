@@ -330,12 +330,10 @@ namespace BUEHT
       {
         if ( (n%2) == 0 )
         {
-	  std::cout << "A: " << 2.0/((double)(n+1)) << "\n";
           return 2.0/((double)(n+1));
         }
         else
         {
-	  std::cout << "A: 0.0\n";
           return 0.0;
         }
       }
@@ -344,7 +342,6 @@ namespace BUEHT
       {
         sum+=std::pow(a,i)/double(factorial(i));
       }
-      std::cout << "A: " << std::exp(-a)*double(factorial(n))/std::pow(a,n+1)*sum << "\n";
       return std::exp(-a)*double(factorial(n))/std::pow(a,n+1)*sum;
     }
 
@@ -359,12 +356,10 @@ namespace BUEHT
       {
         if ( (n%2) == 0 )
         {
-	  std::cout << "B: " << 2.0/((double)(n+1)) << "\n";
           return 2.0/((double)(n+1));
         }
         else
         {
-	  std::cout << "B: 0.0\n";
           return 0.0;
         }
       }
@@ -373,7 +368,6 @@ namespace BUEHT
         sum1+=std::pow(a,i)/factorial(i);
         sum2+=std::pow(-a,i)/factorial(i);
       }
-      std::cout << "B: " << factorial(n)/std::pow(a,n+1)*(-std::exp(-a)*sum1+std::exp(a)*sum2) << "\n";
       return factorial(n)/std::pow(a,n+1)*(-std::exp(-a)*sum1+std::exp(a)*sum2);
     }
 
